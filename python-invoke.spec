@@ -9,7 +9,7 @@
 Summary:	Managing shell-oriented subprocesses and organizing executable Python code into CLI-invokable tasks
 Name:		python-%{module}
 Version:	1.3.0
-Release:	3
+Release:	4
 License:	BSD
 Group:		Libraries/Python
 # if pypi:
