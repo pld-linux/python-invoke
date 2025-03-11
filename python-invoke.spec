@@ -15,7 +15,7 @@ Summary(pl.UTF-8):	Zarządzanie podprocesami powłoki i organizowanie kodu Pytho
 Name:		python-%{module}
 # keep 1.x here for python2 support
 Version:	1.7.3
-Release:	2
+Release:	3
 License:	BSD
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/invoke/
