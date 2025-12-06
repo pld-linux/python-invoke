@@ -8,8 +8,6 @@
 %bcond_without	python3 # CPython 3.x module
 
 %define		module		invoke
-%define		egg_name	invoke
-%define		pypi_name	invoke
 Summary:	Managing shell-oriented subprocesses and organizing executable Python code into CLI-invokable tasks
 Summary(pl.UTF-8):	Zarządzanie podprocesami powłoki i organizowanie kodu Pythona w zadania wywoływane z CLI
 Name:		python-%{module}
@@ -19,7 +17,7 @@ Release:	3
 License:	BSD
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/invoke/
-Source0:	https://files.pythonhosted.org/packages/source/i/invoke/%{pypi_name}-%{version}.tar.gz
+Source0:	https://files.pythonhosted.org/packages/source/i/invoke/%{module}-%{version}.tar.gz
 # Source0-md5:	0ce81c61f5dc2d6297a33b3f3c05869c
 URL:		https://www.pyinvoke.org/
 %if %{with python2}
@@ -87,7 +85,7 @@ API documentation for Python invoke module.
 Dokumentacja API modułu Pythona invoke.
 
 %prep
-%setup -q -n %{pypi_name}-%{version}
+%setup -q -n %{module}-%{version}
 
 %build
 %if %{with python2}
@@ -146,7 +144,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/inv-2
 %attr(755,root,root) %{_bindir}/invoke-2
 %{py_sitescriptdir}/%{module}
-%{py_sitescriptdir}/%{egg_name}-%{version}-py*.egg-info
+%{py_sitescriptdir}/%{module}-%{version}-py*.egg-info
 %endif
 
 %if %{with python3}
@@ -158,7 +156,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/inv
 %{_bindir}/invoke
 %{py3_sitescriptdir}/%{module}
-%{py3_sitescriptdir}/%{egg_name}-%{version}-py*.egg-info
+%{py3_sitescriptdir}/%{module}-%{version}-py*.egg-info
 %endif
 
 %if %{with doc}
