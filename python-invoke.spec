@@ -5,7 +5,7 @@
 %bcond_without	doc	# Sphinx documentation
 %bcond_with	tests	# unit tests (some failures)
 %bcond_without	python2 # CPython 2.x module
-%bcond_without	python3 # CPython 3.x module
+%bcond_with	python3 # CPython 3.x module (built from python3-invoke.spec)
 
 %define		module		invoke
 Summary:	Managing shell-oriented subprocesses and organizing executable Python code into CLI-invokable tasks
@@ -13,7 +13,7 @@ Summary(pl.UTF-8):	Zarządzanie podprocesami powłoki i organizowanie kodu Pytho
 Name:		python-%{module}
 # keep 1.x here for python2 support
 Version:	1.7.3
-Release:	3
+Release:	4
 License:	BSD
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/invoke/
