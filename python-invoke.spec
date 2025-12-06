@@ -120,12 +120,20 @@ rm -rf $RPM_BUILD_ROOT
 
 %py_postclean
 %{__rm} -r $RPM_BUILD_ROOT%{py_sitescriptdir}/invoke/vendor/yaml3
+
+%{__mv} $RPM_BUILD_ROOT%{_bindir}/inv{,-2}
+%{__mv} $RPM_BUILD_ROOT%{_bindir}/invoke{,-2}
 %endif
 
 %if %{with python3}
 %py3_install
 
 %{__rm} -r $RPM_BUILD_ROOT%{py3_sitescriptdir}/invoke/vendor/yaml2
+
+%{__mv} $RPM_BUILD_ROOT%{_bindir}/inv{,-3}
+%{__mv} $RPM_BUILD_ROOT%{_bindir}/invoke{,-3}
+ln -s inv-3 $RPM_BUILD_ROOT%{_bindir}/inv
+ln -s invoke-3 $RPM_BUILD_ROOT%{_bindir}/invoke
 %endif
 
 %clean
@@ -135,6 +143,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc LICENSE README.rst
+%attr(755,root,root) %{_bindir}/inv-2
+%attr(755,root,root) %{_bindir}/invoke-2
 %{py_sitescriptdir}/%{module}
 %{py_sitescriptdir}/%{egg_name}-%{version}-py*.egg-info
 %endif
@@ -143,8 +153,10 @@ rm -rf $RPM_BUILD_ROOT
 %files -n python3-%{module}
 %defattr(644,root,root,755)
 %doc LICENSE README.rst
-%attr(755,root,root) %{_bindir}/inv
-%attr(755,root,root) %{_bindir}/invoke
+%attr(755,root,root) %{_bindir}/inv-3
+%attr(755,root,root) %{_bindir}/invoke-3
+%{_bindir}/inv
+%{_bindir}/invoke
 %{py3_sitescriptdir}/%{module}
 %{py3_sitescriptdir}/%{egg_name}-%{version}-py*.egg-info
 %endif
