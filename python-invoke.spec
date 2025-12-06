@@ -1,9 +1,9 @@
-# TODO: system six, yaml
+# TODO: system lexicon, six, yaml
 # completions (bash, fish, zsh: invoke/completion/*.completion)
 #
 # Conditional build:
 %bcond_without	doc	# Sphinx documentation
-%bcond_with	tests	# unit tests
+%bcond_with	tests	# unit tests (some failures)
 %bcond_without	python2 # CPython 2.x module
 %bcond_without	python3 # CPython 3.x module
 
@@ -24,7 +24,6 @@ URL:		https://www.pyinvoke.org/
 BuildRequires:	python-modules >= 1:2.7
 BuildRequires:	python-setuptools
 %if %{with tests}
-BuildRequires:	python-invocations >= 2.4.0
 BuildRequires:	python-mock >= 1.0.1
 BuildRequires:	python-pytest >= 4.6.3
 BuildRequires:	python-pytest-relaxed >= 1.1.5
@@ -34,7 +33,6 @@ BuildRequires:	python-pytest-relaxed >= 1.1.5
 BuildRequires:	python3-modules >= 1:3.4
 BuildRequires:	python3-setuptools
 %if %{with tests}
-BuildRequires:	python3-invocations >= 2.4.0
 BuildRequires:	python3-pytest >= 4.6.3
 BuildRequires:	python3-pytest-relaxed >= 1.1.5
 %endif
@@ -42,8 +40,8 @@ BuildRequires:	python3-pytest-relaxed >= 1.1.5
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
 %if %{with doc}
-BuildRequires:	python3-alabaster >= 0.7
-BuildRequires:	sphinx-pdg-3
+BuildRequires:	python-alabaster >= 0.7
+BuildRequires:	sphinx-pdg-2
 %endif
 Requires:	python-modules >= 1:2.7
 BuildArch:	noarch
@@ -93,7 +91,8 @@ Dokumentacja API modułu Pythona invoke.
 
 %if %{with tests}
 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
-%{__python} tasks.py test
+PYTEST_PLUGINS=pytest_relaxed.plugin \
+%{__python} -m pytest tests
 %endif
 %endif
 
@@ -102,12 +101,13 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
 
 %if %{with tests}
 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
-%{__python} tasks.py test
+PYTEST_PLUGINS=pytest_relaxed.plugin \
+%{__python} -m pytest tests
 %endif
 %endif
 
 %if %{with doc}
-sphinx-build-3 -b html sites/docs sites/docs/_build/html
+sphinx-build-2 -b html sites/docs sites/docs/_build/html
 %endif
 
 %install
